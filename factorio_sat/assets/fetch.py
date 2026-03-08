@@ -3,6 +3,7 @@ import glob
 import json
 import shutil
 import sys
+import os
 from os import path
 
 try:
@@ -50,6 +51,11 @@ def fetch_tilemaps(base_directory: str):
         destination = path.join(path.dirname(__file__), file[-1])
 
         print('Copying: {} -> {}'.format(source, destination))
+        
+        # Factorio V1 and V2
+        if not os.path.exists(source):
+            source = source.replace("hr-", "")
+
         shutil.copyfile(source, destination)
 
 
